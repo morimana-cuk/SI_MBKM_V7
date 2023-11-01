@@ -1,16 +1,23 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
 <!-- <li class='nav-item'><a class='nav-link' href='{{ backpack_url('students') }}'><i class='nav-icon la la-question'></i> Students</a></li> -->
+<li class="nav-title">Mitra</li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('partner') }}'><i class='nav-icon la la-handshake'></i> Partners</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('acctive-account-mitra') }}'><i class='nav-icon la la-user-check'></i>validasi Partners</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('validasi-mbkm') }}'><i class='nav-icon la la-book-check'></i> Validasi mbkms</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('management-m-b-k-m') }}'><i class='nav-icon la la-question'></i> Register MBKM</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('register-mbkm') }}'><i class='nav-icon la la-question'></i> Valdasi Pendaftar</a></li>
+<li class="nav-title">Admin / Kaprodi</li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('acctive-account-mitra') }}'><i class='nav-icon la la-user-check'></i>Validasi Partners</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('validasi-mbkm') }}'><i class='nav-icon la la-book'></i> Validasi MBKM</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('departmen') }}'><i class='nav-icon la la-question'></i> Departmens</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('register-mbkm') }}'><i class='nav-icon la la-question'></i> Register mbkms</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('lecturer') }}'><i class='nav-icon la la-question'></i> Lecturers</a></li>
+<li class="nav-title">Dosen</li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('nilaimbkm') }}'><i class='nav-icon la la-question'></i> Nilai MBKM</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('progress-mahasiswa') }}'><i class='nav-icon la la-question'></i> Progress Mahasiswa</a></li>
+<li class="nav-title">Students</li>
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-level-down-alt"></i>Mahasiswa</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('mbkm') }}'><i class='nav-icon la la-book'></i> Program MBKM</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('mbkm-report') }}'><i class='nav-icon la la-notes'></i> Laporan</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('mbkm-report') }}'><i class='nav-icon la la-book'></i> Laporan</a></li>
     </ul>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('management-m-b-k-m') }}'><i class='nav-icon la la-question'></i> Management m b k ms</a></li>
+</li>

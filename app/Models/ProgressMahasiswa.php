@@ -5,7 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class ManagementMBKM extends Model
+class ProgressMahasiswa extends Model
 {
     use CrudTrait;
 
@@ -15,7 +15,7 @@ class ManagementMBKM extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'mbkms';
+    protected $table = 'progress_mahasiswas';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -28,14 +28,7 @@ class ManagementMBKM extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function partner()
-    {
-        return $this->belongsTo(Partner::class);
-    }
-    public function regs()
-    {
-        return $this->hasMany(RegisterMbkm::class);
-    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -59,26 +52,4 @@ class ManagementMBKM extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function getStatusSpan() {
-        $status = $this->attributes['status_acc'];
-        
-        if ($status == 'accepted') {
-            return '<span class="badge bg-success">Accept</span>';
-        } elseif ($status == 'rejected') {
-            return '<span class="badge bg-danger">Rejected</span>';
-        } else {
-            return '<span class="badge bg-warning">Pending</span>';
-        }
-    }
-    public function getIsactiveSpan() {
-        $status = $this->attributes['is_active'];
-        
-        if ($status == 'active') {
-            return '<span class="badge bg-success">Active</span>';
-        } elseif ($status == 'inactive') {
-            return '<span class="badge bg-danger">Inactive</span>';
-        } else {
-            return '<span class="badge bg-warning">Pending</span>';
-        }
-    }
 }

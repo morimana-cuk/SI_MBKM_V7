@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\InvolvedCourse;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class ManagementMBKM extends Model
+class Nilaimbkm extends Model
 {
     use CrudTrait;
 
@@ -15,7 +16,7 @@ class ManagementMBKM extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'mbkms';
+    protected $table = 'reg_mbkms';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -28,19 +29,40 @@ class ManagementMBKM extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function partner()
+
+
+    public function input_nilai($crud = false)
     {
-        return $this->belongsTo(Partner::class);
+        return '<a class="btn btn-sm btn-link" href="/admin/nilaimbkm/' . $this->id . '/inputnilai" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Input Nilai</a>';
     }
-    public function regs()
+    public function download_nilai($crud = false)
     {
-        return $this->hasMany(RegisterMbkm::class);
+        return '<a class="btn btn-sm btn-link" href="/admin/download/' . $this->nilai_mitra . '" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Nilai Mitra</a>';
     }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function lecturers()
+    {
+        return $this->belongsTo(Lecturer::class, 'pembimbing', 'id');
+    }
+
+    public function mbkm()
+    {
+        return $this->belongsTo(Mbkm::class, 'mbkm_id', 'id');
+    }
+
+    public function students()
+    {
+        return $this->belongsTo(Students::class, 'student_id', 'id');
+    }
+
+    public function involved(){
+        return $this->hasMany(InvolvedCourse::class, 'reg_mbkm_id', 'id');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -59,26 +81,4 @@ class ManagementMBKM extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function getStatusSpan() {
-        $status = $this->attributes['status_acc'];
-        
-        if ($status == 'accepted') {
-            return '<span class="badge bg-success">Accept</span>';
-        } elseif ($status == 'rejected') {
-            return '<span class="badge bg-danger">Rejected</span>';
-        } else {
-            return '<span class="badge bg-warning">Pending</span>';
-        }
-    }
-    public function getIsactiveSpan() {
-        $status = $this->attributes['is_active'];
-        
-        if ($status == 'active') {
-            return '<span class="badge bg-success">Active</span>';
-        } elseif ($status == 'inactive') {
-            return '<span class="badge bg-danger">Inactive</span>';
-        } else {
-            return '<span class="badge bg-warning">Pending</span>';
-        }
-    }
 }

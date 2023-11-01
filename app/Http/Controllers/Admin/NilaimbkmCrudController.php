@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\RegisterMbkmRequest;
+use App\Http\Requests\NilaimbkmRequest;
+use App\Models\Nilaimbkm;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Backpack\CRUD\app\Library\Validation\Rules\ValidUpload;
+
 /**
- * Class RegisterMbkmCrudController
+ * Class NilaimbkmCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class RegisterMbkmCrudController extends CrudController
+class NilaimbkmCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     // use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    // use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    // use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -26,11 +27,22 @@ class RegisterMbkmCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\RegisterMbkm::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/register-mbkm');
-        CRUD::setEntityNameStrings('register mbkm', 'register mbkms');
-    }
+        CRUD::setModel(\App\Models\Nilaimbkm::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/nilaimbkm');
+        CRUD::setEntityNameStrings('nilaimbkm', 'nilaimbkms');
+        $this->crud->addColumns([
+            'lecturers.lecturer_name',
+            'students.name',
+            'mbkm.program_name'
+        ]);
 
+        $this->crud->addClause('where', 'pembimbing', '!=', 'null');
+        $this->crud->addClause('where', 'nilai_mitra', '!=', 'null');
+
+
+
+    }
+    
     /**
      * Define what happens when the List operation is loaded.
      * 
@@ -39,7 +51,9 @@ class RegisterMbkmCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->setColumns(['student.name', 'mbkm.info', 'status']);
+        $this->crud->addButtonFromModelFunction('line', 'input_nilai', 'input_nilai', 'beginning');
+        $this->crud->addButtonFromModelFunction('line', 'download_nilai', 'download_nilai', 'beginning');
+        
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -56,11 +70,10 @@ class RegisterMbkmCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(RegisterMbkmRequest::class);
-
-
+        CRUD::setValidation(NilaimbkmRequest::class);
 
         
+
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
@@ -76,12 +89,14 @@ class RegisterMbkmCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        $this->crud->addField([
-            'name' => 'status',
-            'type' => 'select_from_array',
-            'label' => 'Status ACC',
-            'options' => ['accepted' => 'Accepted', 'rejected' => 'Rejected'],
-           
-        ]);
+        $this->setupCreateOperation();
+    }
+
+    protected function inputNilai($id){
+        $crud = $this->crud;
+        $data = Nilaimbkm::with(['involved.course'])->get();
+
+        return $data;
+        return view('vendor.backpack.crud.inputNilai', compact('crud'));
     }
 }

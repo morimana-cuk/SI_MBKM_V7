@@ -35,4 +35,10 @@ Route::group([
     //     return view('vendor/backpack/crud/report_mbkm');
     // });
     Route::crud('management-m-b-k-m', 'ManagementMBKMCrudController');
+    Route::crud('nilaimbkm', 'NilaimbkmCrudController');
+    Route::get('/nilaimbkm/{id}/inputnilai', 'NilaimbkmCrudController@inputNilai');
+    Route::crud('progress-mahasiswa', 'ProgressMahasiswaCrudController');
+
+    // download route
+    Route::get('/download/{name}', 'DownloadController@download');
 }); // this should be the absolute last line of this file
