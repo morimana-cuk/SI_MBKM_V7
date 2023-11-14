@@ -30,6 +30,8 @@
             Partners</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('lecturer') }}'><i class='nav-icon la la-question'></i>
             Lecturers</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('jenis-mbkm') }}'><i class='nav-icon la la-question'></i> Jenis mbkms</a></li>
+
 @endif
 @if ($level == 'mitra')
     <li class="nav-title">Mitra</li>
@@ -104,5 +106,4 @@
     </li>
 @endif
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('jenis-mbkm') }}'><i class='nav-icon la la-question'></i> Jenis mbkms</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('mbkm-external') }}'><i class='nav-icon la la-question'></i> Mbkm externals</a></li>

@@ -23,10 +23,9 @@ class CreateRegMbkmsTable extends Migration
             $table->unsignedBigInteger('pembimbing')->nullable();
             $table->string('requirements_files')->nullable();
             $table->string('partner_grade')->nullable();
-  
-    
-  
             $table->foreign('pembimbing')->references('id')->on('lecturers')->onDelete('cascade');
+            $table->text('keterangan_kaprodi')->nullable();
+            $table->enum('acc_nilai', ['Approved', 'Not Approved'])->nullable()->default(null);
             $table->timestamps();
         });
     }
